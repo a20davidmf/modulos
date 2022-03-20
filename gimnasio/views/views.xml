@@ -1,0 +1,166 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="gimnasio_list_clase">
+      <field name="name">gimnasio list clase</field>
+      <field name="model">gimnasio.clase</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="dificultad"/>
+          <field name="descripcion"/>
+          <field name="duracion"/>
+          <field name="monitor"/>
+          <field name="alumnos"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="gimnasio_list_monitor">
+      <field name="name">gimnasio list monitor</field>
+      <field name="model">gimnasio.monitor</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="fecha_inicio"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="gimnasio_list_alumno">
+      <field name="name">gimnasio list alumno</field>
+      <field name="model">gimnasio.alumno</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="fecha_inicio"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="library_book_view_form" model="ir.ui.view">
+        <field name="name">gimnasio.clase.form</field>
+        <field name="model">gimnasio.clase</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                  <group>
+                    <group>
+                      <field name="name"/>
+                      <field name="dificultad"/>
+                      <field name="descripcion"/>
+                    </group>
+                    <group>
+                      <field name="hora_inicio"/>
+                      <field name="hora_fin"/>
+                    </group>
+                    <group>
+                      <field name="monitor" options="{'no_create_edit':True}" />
+                      <field name="alumnos" widget="many2many_tags" options="{'no_create_edit':True,'no_create':True}"/>
+                    </group>
+                  </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View Form Monitor-->
+    <record id="gimnasio_monitor_inherit" model="ir.ui.view">
+        <field name="name">gimnasio.monitor.inherit</field>
+        <field name="model">gimnasio.monitor</field>
+        <field name="arch" type="xml">
+          <form>
+            <group>
+              <field name="partner_id"/>
+              <field name="numero_miembro"/>
+            </group>
+            <group>
+              <field name="fecha_inicio"/>
+              <field name="fecha_fin"/>
+            </group>
+          </form>
+        </field>
+      </record>  
+
+      <!-- View Form Alumno-->
+      <record id="gimnasio_alumno_inherit" model="ir.ui.view">
+        <field name="name">gimnasio.alumno.inherit</field>
+        <field name="model">gimnasio.alumno</field>
+        <field name="arch" type="xml">
+          <form>
+            <group>
+              <field name="partner_id"/>
+              <field name="numero_miembro"/>
+            </group>
+            <group>
+              <field name="fecha_inicio"/>
+              <field name="antiguedad"/>
+            </group>
+          </form>
+        </field>
+      </record> 
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="gimnasio_clases_action_window">
+      <field name="name">Clases</field>
+      <field name="res_model">gimnasio.clase</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="gimnasio_monitor_action_window">
+      <field name="name">Monitores</field>
+      <field name="res_model">gimnasio.monitor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="gimnasio_alumno_action_window">
+      <field name="name">Alumnos</field>
+      <field name="res_model">gimnasio.alumno</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+    
+    <!-- <record model="ir.actions.server" id="mimodulo.action_server">
+      <field name="name">mimodulo server</field>
+      <field name="model_id" ref="model_mimodulo_mimodulo"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record> -->
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Gimnasio" id="gimnasio.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Clases" id="gimnasio.clases" parent="gimnasio.menu_root" action="gimnasio_clases_action_window"/>
+    <menuitem name="Monitores" id="gimnasio.monitor" parent="gimnasio.menu_root" action="gimnasio_monitor_action_window"/>
+    <menuitem name="Alumnos" id="gimnasio.alumno" parent="gimnasio.menu_root" action="gimnasio_alumno_action_window"/>
+
+    <!-- actions -->
+
+    <!-- <menuitem name="List" id="mimodulo.clases_list" parent="mimodulo.clases"
+              action="mimodulo_clases_action_window"/>
+    <menuitem name="List" id="mimodulo.clases_list" parent="mimodulo.monitor"
+              action="mimodulo_monitor_action_window"/> -->
+    <!-- <menuitem name="List" id="mimodulo.monitor_list" parent="mimodulo.monitor"
+              action="mimodulo."/> -->
+
+    <!-- <menuitem name="Server to list" id="mimodulo" parent="mimodulo.menu_2"
+              action="mimodulo.action_server"/> -->
+
+  </data>
+</odoo>

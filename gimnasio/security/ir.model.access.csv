@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gimnasio_clase,gimnasio.clase,model_gimnasio_clase,base.group_user,1,1,1,1
+access_gimnasio_monitor,gimnasio.monitor,model_gimnasio_monitor,base.group_user,1,1,1,1
+access_gimnasio_alumno,gimnasio.alumno,model_gimnasio_alumno,base.group_user,1,1,1,1
